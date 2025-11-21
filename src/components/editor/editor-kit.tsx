@@ -39,8 +39,8 @@ import { TocKit } from '@/components/editor/plugins/toc-kit';
 import { ToggleKit } from '@/components/editor/plugins/toggle-kit';
 
 export const EditorKit = [
-  ...CopilotKit,
-  ...AIKit,
+  // ...CopilotKit,
+  // ...AIKit,
 
   // Elements
   ...BasicBlocksKit,
@@ -56,9 +56,9 @@ export const EditorKit = [
   ...LinkKit,
   ...MentionKit,
 
-  // Marks
-  ...BasicMarksKit,
-  ...FontKit,
+  // // Marks
+  // ...BasicMarksKit,
+  // ...FontKit,
 
   // Block Style
   ...ListKit,
@@ -74,20 +74,20 @@ export const EditorKit = [
   ...SlashKit,
   ...AutoformatKit,
   ...CursorOverlayKit,
-  ...BlockMenuKit,
-  ...DndKit,
-  ...EmojiKit,
-  ...ExitBreakKit,
-  TrailingBlockPlugin,
+  // ...BlockMenuKit,
+  // ...DndKit,
+  // ...EmojiKit,
+  // ...ExitBreakKit,
+  // TrailingBlockPlugin,
 
-  // Parsers
-  ...DocxKit,
-  ...MarkdownKit,
+  // // Parsers
+  // ...DocxKit,
+  // ...MarkdownKit,
 
-  // UI
-  ...BlockPlaceholderKit,
-  ...FixedToolbarKit,
-  ...FloatingToolbarKit,
+  // // UI
+  // ...BlockPlaceholderKit,
+  // ...FixedToolbarKit,
+  // ...FloatingToolbarKit,
 ];
 
 export type MyEditor = TPlateEditor<Value, (typeof EditorKit)[number]>;
