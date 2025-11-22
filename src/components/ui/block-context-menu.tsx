@@ -8,8 +8,23 @@ import {
   BlockMenuPlugin,
   BlockSelectionPlugin,
 } from '@platejs/selection/react';
-import { KEYS } from 'platejs';
+import { KEYS, type TElement, type TText } from 'platejs';
 import { useEditorPlugin, usePlateState, usePluginOption } from 'platejs/react';
+
+// Helper function to extract text from Slate nodes
+function getNodeString(node: any): string {
+  if ('text' in node) {
+    return (node as TText).text;
+  }
+
+  if ('children' in node) {
+    return (node as TElement).children
+      .map((child) => getNodeString(child))
+      .join('');
+  }
+
+  return '';
+}
 
 import {
   ContextMenu,
@@ -115,6 +130,34 @@ export function BlockContextMenu({ children }: { children: React.ReactNode }) {
               }}
             >
               Ask AI
+            </ContextMenuItem>
+            <ContextMenuItem
+              onClick={() => {
+                // Trigger copy for selected blocks
+                const selectedBlocks = editor
+                  .getApi(BlockSelectionPlugin)
+                  .blockSelection.getNodes();
+
+                if (selectedBlocks.length === 0) return;
+
+                const nodes = selectedBlocks.map(([node]) => node);
+                const plainText = nodes
+                  .map((node) => {
+                    try {
+                      return getNodeString(node);
+                    } catch {
+                      return '';
+                    }
+                  })
+                  .filter(Boolean)
+                  .join('\n\n');
+
+                if (navigator.clipboard) {
+                  navigator.clipboard.writeText(plainText);
+                }
+              }}
+            >
+              Copy
             </ContextMenuItem>
             <ContextMenuItem
               onClick={() => {
