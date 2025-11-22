@@ -6,6 +6,7 @@
     "build": "next build",
     "depset": "pnpm dlx depset@latest @udecode --yes",
     "dev": "next dev",
+    "dev:webpack": "next dev --experimental-disable-turbopack",
     "lint": "eslint",
     "lint:fix": "eslint --fix && prettier --write . --log-level warn",
     "preview": "next build && next start",
